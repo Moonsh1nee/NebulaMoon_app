@@ -20,6 +20,10 @@ export interface Habit {
     user: string;
 }
 
+export interface RegisterResponse {
+    message: string;
+}
+
 export interface LoginResponse {
     token: string;
 }
