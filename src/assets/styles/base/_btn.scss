@@ -1,0 +1,24 @@
+@use "../base/variables" as *;
+@use "sass:color";
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: $font-secondary;
+  font-weight: 600;
+  font-size: 1rem;
+
+  padding: 8px 18px;
+  border-radius: 10px;
+  background-color: $accent;
+  color: $background;
+
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: color.adjust($accent, $lightness: -20%);
+    color: color.adjust($background, $lightness: -40%);
+  }
+}

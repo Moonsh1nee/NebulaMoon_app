@@ -1,1 +1,4 @@
-@use 'base/index';
+@forward './base/index';
+@forward './components/header';
+@forward './block/auth';
+@forward './components/sidebar';

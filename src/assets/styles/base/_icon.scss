@@ -1,0 +1,16 @@
+@use './variables' as *;
+
+.icon {
+  cursor: pointer;
+
+  width: 16px;
+  height: 16px;
+  fill: $accent;
+
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    fill: $hover;
+  }
+}
+

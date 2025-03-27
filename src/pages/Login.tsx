@@ -14,30 +14,48 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login:</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Password"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Login"}
-        </button>
-      </form>
-      {error && <p>{error}</p>}
+    <div className="auth">
+      <div className="container">
+        <div className="auth__wrapper">
+          <h1 className="auth__title">Login</h1>
+          <form className="auth__form" onSubmit={handleSubmit}>
+            <div className="auth__form-field">
+              <label htmlFor="email" className="auth__form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="auth__form-input"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="auth__form-field">
+              <label htmlFor="password" className="auth__form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                className="auth__form-input"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button
+              type="submit"
+              className="auth__form-button"
+              disabled={loading}
+            >
+              {loading ? "Logging in..." : "Login"}
+            </button>
+            {error && <p className="auth__error">{error}</p>}
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

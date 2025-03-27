@@ -1,0 +1,99 @@
+@use "../base/variables" as *;
+@use "sass:color";
+
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    background-color: $block-bg;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &__title {
+    color: $text-primary;
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-label {
+      font-weight: 500;
+      font-size: 14px;
+      color: $text-secondary;
+      margin-bottom: 5px;
+    }
+
+    &-input {
+      padding: 10px;
+      background-color: $background;
+      border: 1px solid $border;
+      border-radius: 5px;
+      color: $text-primary;
+      font-family: $font-primary;
+      font-size: 16px;
+      outline: none;
+
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: $accent;
+      }
+
+      &::placeholder {
+        color: $text-secondary;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &-button {
+      background-color: $accent;
+      border: none;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: $font-secondary;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover:not(:disabled) {
+        background-color: color.adjust($accent, $lightness: 10%);
+      }
+
+      &:disabled {
+        background-color: $hover;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__error {
+    font-weight: 700;
+    font-size: 14px;
+    color: $error;
+    text-align: center;
+    margin-top: 10px;
+  }
+}

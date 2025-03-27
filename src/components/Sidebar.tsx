@@ -3,37 +3,20 @@ import { NavLink } from "react-router-dom";
 const Sidebar = () => {
   return (
     <aside className="sidebar">
-      <nav>
-        <ul>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
+      <nav className="sidebar__nav">
+        <ul className="sidebar__nav-list">
+          <li className="sidebar__nav-item">
+            <NavLink className="sidebar__nav-link" to="/">
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/login"
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
-              Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/tasks"
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
+          <li className="sidebar__nav-item">
+            <NavLink className="sidebar__nav-link" to="/tasks">
               Tasks
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/habits"
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
+          <li className="sidebar__nav-item">
+            <NavLink className="sidebar__nav-link" to="/habits">
               Habits
             </NavLink>
           </li>

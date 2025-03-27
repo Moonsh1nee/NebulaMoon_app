@@ -1,3 +1,27 @@
+@use './variables' as *;
+
 body {
+  color: $text-primary;
+  background-color: $background;
   font-size: 16px;
+  font-family: $font-primary;
+  font-weight: 400;
+}
+
+a {
+  color: $accent;
+  font-family: $font-secondary;
+  font-weight: 600;
+  font-size: 16px;  
+}
+
+.container {
+  max-width: $container;
+  padding: 0 $container-padding;
+  margin: 0 auto;
+}
+
+.main {
+  padding-top: 80px;
+  padding-left: 260px;
 }

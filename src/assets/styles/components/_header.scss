@@ -1,0 +1,78 @@
+@use "../base/mixins" as *;
+@use "../base/variables" as *;
+@use "sass:color";
+
+.header {
+  position: fixed;
+  width: 100%;
+  max-height: 70px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  border-bottom: 1px solid $border;
+
+  &__wrapper {
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 30px;
+    @include flex-center-sb;
+    gap: 15px;
+  }
+
+  &__title {
+    display: inline-flex;
+    flex-direction: column;
+    color: $text-primary;
+    font-size: 30px;
+    font-weight: 700;
+    font-family: $font-secondary;
+    letter-spacing: 1px;
+    line-height: 0.8;
+
+    span {
+      font-size: 18px;
+      letter-spacing: normal;
+      font-weight: 600;
+      color: $accent;
+    }
+  }
+
+  &__auth {
+    @include flex-center;
+    gap: 20px;
+
+    &-icon__wrapper {
+      position: relative;
+    }
+
+    &-icon {
+      @include flex-center-center;
+      width: 34px;
+      height: 34px;
+      background-color: $block-bg;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $text-primary;
+
+        svg {
+          fill: $background;
+        }
+      }
+    }
+  }
+
+  &__modal {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: $block-bg;
+    border-radius: 10px;
+    padding: 20px;
+    display: block;
+    z-index: 100;
+  }
+}

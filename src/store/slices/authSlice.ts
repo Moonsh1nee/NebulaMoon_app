@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ErrorResponse, LoginResponse } from "../../types";
 import api from "../../api";
 import { RootState } from "../index";
@@ -10,7 +10,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  token: null,
+  token: localStorage.getItem('token') || null,
   loading: false,
   error: null,
 };
@@ -37,9 +37,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setToken(state, action: PayloadAction<string>) {
-      state.token = action.payload;
-    },
     clearToken(state) {
       state.token = null;
     },
@@ -53,6 +50,7 @@ const authSlice = createSlice({
     .addCase(login.fulfilled, (state, action) => {
       state.loading = false;
       state.token = action.payload.token;
+      localStorage.setItem("token", action.payload.token);
     })
     .addCase(login.rejected, (state, action) => {
       state.loading = false;
@@ -61,5 +59,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, clearToken } = authSlice.actions;
+export const { clearToken } = authSlice.actions;
 export default authSlice.reducer;

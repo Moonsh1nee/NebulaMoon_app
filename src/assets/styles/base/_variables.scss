@@ -1,0 +1,25 @@
+// Colors
+$background: #252525;          // main background color
+$text-primary: #d9d9d9;        // main text color
+$text-secondary: #a1a1a1;      // secondary text color(for example, placeholders)
+$accent: #3d8bff;              // accent color(for example, links)
+$block-bg: #2f2f2f;            // background for blocks(for example, cards)
+$border: #3a3a3a;              // color for borders
+$hover: #373737;               // background color for hover
+$success: #2ea043;             // success
+$warning: #f1c21b;             // warning
+$error: #d93025;               // error
+
+// Breakpoints (media queries)
+$breakpoint-xs: 480px;         // Mobile devices
+$breakpoint-sm: 768px;         // Planchets
+$breakpoint-md: 1024px;        // Laptops
+$breakpoint-lg: 1280px;        // Desktops
+$breakpoint-xl: 1440px;        // Large desktops
+
+// Fonts
+$font-primary: "Inter", sans-serif;         // main font for text
+$font-secondary: "Poppins", sans-serif;     // secondary font for text
+// Container
+$container: 1230px;            // max-width for container
+$container-padding: 15px;      // padding for container
