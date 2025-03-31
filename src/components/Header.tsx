@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hook";
 import Icon from "./Icon";
 import React from "react";
-import { clearToken } from "../store/slices/authSlice";
+import { logout } from "../store/slices/authSlice";
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const token = useAppSelector((state) => state.auth.token);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const modalRef = React.useRef<HTMLDivElement>(null);
 
@@ -18,8 +18,7 @@ const Header = () => {
   const handleLogout = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsModalOpen(false);
-    localStorage.removeItem("token");
-    dispatch(clearToken());
+    dispatch(logout());
   };
 
   React.useEffect(() => {
@@ -48,7 +47,7 @@ const Header = () => {
           Nebula
           <span>Moon</span>
         </Link>
-        {token ? (
+        {isAuthenticated ? (
           <div className="header__auth-icon__wrapper">
             <div className="header__auth-icon" onClick={handleIconClick}>
               <Icon name="account_auth_test" className="auth" />

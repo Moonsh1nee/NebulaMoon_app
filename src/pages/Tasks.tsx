@@ -5,13 +5,17 @@ import { fetchTasks } from "../store/slices/tasksSlice";
 const Tasks = () => {
   const dispatch = useAppDispatch();
   const { tasks, loading, error } = useAppSelector((state) => state.tasks);
-  const token = useAppSelector((state) => state.auth.token);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
-    if (token) {
+    if (isAuthenticated) {
       dispatch(fetchTasks());
     }
-  }, [token, dispatch]);
+  }, [isAuthenticated, dispatch]);
+
+  if (!isAuthenticated) {
+    return <h1>Please log in to view your tasks.</h1>;
+  }
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -25,7 +29,7 @@ const Tasks = () => {
     <div>
       <h1>Tasks Page</h1>
       <ul>
-        {tasks.map((task) => (
+        {tasks.tasks.map((task) => (
           <li key={task._id}>
             {task.title} - {task.completed ? "Done" : "Pending"}
           </li>

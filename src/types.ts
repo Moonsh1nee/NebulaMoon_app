@@ -13,6 +13,13 @@ export interface Task {
     completed: boolean;
 }
 
+export interface TaskResponse {
+    tasks: Task[];
+    limit: number;
+    skip: number;
+    total: number;
+}
+
 export interface Habit {
     _id: string;
     name: string;
@@ -25,7 +32,7 @@ export interface RegisterResponse {
 }
 
 export interface LoginResponse {
-    token: string;
+    message: string;
 }
 
 export interface ErrorResponse {

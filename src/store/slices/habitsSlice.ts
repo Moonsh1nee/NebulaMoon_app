@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
 import { Habit, ErrorResponse } from "../../types";
-import { RootState } from "../index";
 
 interface HabitsState {
   habits: Habit[];
@@ -18,15 +17,10 @@ const initialState: HabitsState = {
 export const fetchHabits = createAsyncThunk<
   Habit[],
   void,
-  { state: RootState; rejectValue: ErrorResponse }
->("habits/fetchHabits", async (_, { getState, rejectWithValue }) => {
+  { rejectValue: ErrorResponse }
+>("habits/fetchHabits", async (_, { rejectWithValue }) => {
   try {
-    const token = getState().auth.token;
-    const response = await api.get<Habit[]>("/habits", {
-      headers: {
-        Authorization: token ? `Bearer ${token}` : undefined,
-      },
-    });
+    const response = await api.get<Habit[]>("/habits");
     return response.data;
   } catch (error) {
     return rejectWithValue({ message: "Failed to fetch habits" });

@@ -1,43 +1,66 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
-import { Task, ErrorResponse } from "../../types";
-import { RootState } from "../index";
+import { TaskResponse, ErrorResponse } from "../../types";
 
 interface TasksState {
-  tasks: Task[];
+  tasks: TaskResponse;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: TasksState = {
-  tasks: [],
+  tasks: {
+    tasks: [],
+    limit: 0,
+    skip: 0,
+    total: 0,
+  },
   loading: false,
   error: null,
 };
 
 export const fetchTasks = createAsyncThunk<
-  Task[],
-  void,
-  { state: RootState; rejectValue: ErrorResponse }
->("tasks/fetchTasks", async (_, { getState, rejectWithValue }) => {
+  TaskResponse,
+  { limit?: number; skip?: number } | void,
+  { rejectValue: ErrorResponse }
+>("tasks/fetchTasks", async (args = { limit: 10, skip: 0 }, { rejectWithValue }) => {
+  const { limit = 10, skip = 0 } = args || {};
+  
   try {
-    const token = getState().auth.token;
-    const response = await api.get<Task[]>("/tasks", {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : undefined,
-        },
-      });
+    const response = await api.get<TaskResponse>(
+      `/tasks?limit=${limit}&skip=${skip}`
+    );
     return response.data;
   } catch (error) {
     return rejectWithValue({ message: "Failed to fetch tasks" });
   }
 });
 
+// export const createTask = createAsyncThunk<
+//   TaskResponse,
+//   { title: string; description?: string; dueDate?: string },
+//   { rejectValue: ErrorResponse }
+// >(
+//   "tasks/createTask",
+//   async ({ title, description, dueDate }, { rejectWithValue }) => {
+//     try {
+//       const response = await api.post<TaskResponse>("/tasks", {
+//         title,
+//         description,
+//         dueDate,
+//       });
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue({ message: "Failed to create task" });
+//     }
+//   }
+// );
+
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    setTasks(state, action: PayloadAction<Task[]>) {
+    setTasks(state, action: PayloadAction<TaskResponse>) {
       state.tasks = action.payload;
     },
   },

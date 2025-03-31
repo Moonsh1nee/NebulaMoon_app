@@ -12,12 +12,18 @@ import Habits from "./pages/Habits";
 import NotFound from "./pages/NotFound";
 import Sidebar from "./components/Sidebar";
 import Login from "./pages/Login";
-import { useAppSelector } from "./hook";
+import { useAppDispatch, useAppSelector } from "./hook";
 import Register from "./pages/Register";
 import Header from "./components/Header";
+import { checkAuth } from "./store/slices/authSlice";
 
 const App = () => {
-  const token = useAppSelector((state) => state.auth.token);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
 
   return (
     <Router>
@@ -28,11 +34,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route
             path="/login"
-            element={token ? <Navigate to="/" /> : <Login />}
+            element={isAuthenticated ? <Navigate to="/" /> : <Login />}
           />
           <Route
             path="/register"
-            element={token ? <Navigate to="/" /> : <Register />}
+            element={isAuthenticated ? <Navigate to="/" /> : <Register />}
           />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/habits" element={<Habits />} />
