@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import api from "../../api";
-import { TaskResponse, ErrorResponse, Task } from "../../types";
+import { TaskResponse, ErrorResponse, TaskType } from "../../types";
 
 interface TasksState {
   tasks: TaskResponse;
@@ -40,12 +40,12 @@ export const fetchTasks = createAsyncThunk<
 );
 
 export const createTask = createAsyncThunk<
-  Task,
+  TaskType,
   { title: string; description?: string; dueDate?: string },
   { rejectValue: ErrorResponse }
 >("tasks/createTask", async (taskData, { rejectWithValue }) => {
   try {
-    const response = await api.post<Task>("/tasks", {
+    const response = await api.post<TaskType>("/tasks", {
       title: taskData.title,
       description: taskData.description || null,
       dueDate: taskData.dueDate || null,
@@ -59,7 +59,7 @@ export const createTask = createAsyncThunk<
 });
 
 export const updateTask = createAsyncThunk<
-  Task,
+  TaskType,
   {
     id: string;
     title: string;
@@ -71,7 +71,7 @@ export const updateTask = createAsyncThunk<
 >("tasks/updateTask", async (taskData, { rejectWithValue }) => {
   const { id, ...data } = taskData;
   try {
-    const response = await api.put<Task>(`/tasks/${id}`, data);
+    const response = await api.put<TaskType>(`/tasks/${id}`, data);
     return response.data;
   } catch (error: any) {
     return rejectWithValue({

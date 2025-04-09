@@ -48,7 +48,7 @@ const Header = () => {
           <span>Moon</span>
         </Link>
         {isAuthenticated ? (
-          <div className="header__auth-icon__wrapper">
+          <div className="header__auth-icon-wrapper">
             <div className="header__auth-icon" onClick={handleIconClick}>
               <Icon name="account_auth_test" className="auth" />
             </div>

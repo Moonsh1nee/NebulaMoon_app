@@ -1,19 +1,21 @@
 import React from "react";
-import { Task } from "../types";
+import { TaskType } from "../types";
 
 interface TaskEditModalProps {
-  task: Task;
+  task: TaskType;
   setEditingTask: React.Dispatch<React.SetStateAction<string | null>>;
   newTask: {
     title: string;
     description: string;
     dueDate: string;
+    completed: boolean;
   };
   setNewTask: React.Dispatch<
     React.SetStateAction<{
       title: string;
       description: string;
       dueDate: string;
+      completed: boolean;
     }>
   >;
   handleSaveEdit: (id: string) => void;

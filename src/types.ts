@@ -4,7 +4,7 @@ export interface User {
     password: string;
 }
 
-export interface Task {
+export interface TaskType {
     _id: string;
     title: string;
     description?: string;
@@ -14,7 +14,7 @@ export interface Task {
 }
 
 export interface TaskResponse {
-    tasks: Task[];
+    tasks: TaskType[];
     limit: number;
     skip: number;
     total: number;

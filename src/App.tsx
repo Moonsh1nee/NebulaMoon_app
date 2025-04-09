@@ -28,7 +28,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <main className="main">
         <Routes>
           <Route path="/" element={<Home />} />
