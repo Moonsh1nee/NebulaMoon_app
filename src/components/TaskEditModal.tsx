@@ -41,13 +41,14 @@ const TaskEditModal: React.FC<TaskEditModalProps> = ({
     };
 
     document.addEventListener("click", handleClickOutside);
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [setEditingTask]);
 
   return (
-    <div>
+    <div ref={modalRef} className="tasks__edit-modal">
       <input
         type="text"
         className="tasks__edit-input"
